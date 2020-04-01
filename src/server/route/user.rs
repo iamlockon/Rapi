@@ -1,5 +1,4 @@
-use actix_web::{web, Responder};
-use actix_web::web::{Json};
+use actix_web::{web, Responder, HttpResponse};
 use serde::{Serialize, Deserialize};
 use uuid::Uuid;
 use crate::error::ApiError;
@@ -23,15 +22,14 @@ struct Meta {
   tags: Vec<u32>
 }
 
-async fn user_detail(info: web::Path<Info>) -> Result<Json<UserResponse>, ApiError> {
-  let name = &info.name;
-  Err(ApiError::InternalError)
-  // Ok(Json(UserResponse{
-  //   id: Uuid::new_v4(),
-  //   first_name: String::from(name),
-  //   last_name: String::from(name),
-  //   email: String::from("fff")
-  // }))
+async fn user_detail(info: web::Path<Info>) -> Result<HttpResponse, ApiError> {
+  // Err(ApiError::InternalError)
+  Ok(HttpResponse::Ok().json(UserResponse{
+    id: Uuid::new_v4(),
+    first_name: info.name.to_string(),
+    last_name: info.name.to_string(),
+    email: String::from("fff")
+  }))
 }
 
 async fn update_user(info: web::Json<Meta>) -> impl Responder {
