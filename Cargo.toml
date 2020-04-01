@@ -8,7 +8,11 @@ edition = "2018"
 
 [dependencies]
 actix-web = "2"
+actix-http = "1.0.1"
+failure = "0.1.7"
 actix-rt = "1"
 listenfd = "0.3"
 serde = { version = "1.0", features = ["derive"] }
-log = { version = "0.4", features = ["std", "serde"] }
+log = "0.4"
+uuid = { version = "0.7", features = ["serde", "v4"] }
+derive_more = "0.15"
